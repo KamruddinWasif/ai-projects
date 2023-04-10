@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>A Cup of Coffee</title>
+</head>
+<body>
+    <div class="container">
+        <img class="coffee-img" src="https://cdn-icons-png.flaticon.com/512/1047/1047462.png" alt="Cup of coffee">
+        <h1>A Cup of Coffee</h1>
+        <form id="calculator-form">
+            <input type="number" id="initialDeposit" placeholder="Initial Deposit" required>
+            <input type="number" id="periodicDeposit" placeholder="Periodic Deposit" required>
+            <select id="depositFrequency" required>
+                <option value="" disabled selected>Deposit Frequency</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+                <option value="annually">Annually</option>
+            </select>
+            <input type="number" id="interestRate" placeholder="Interest Rate (%)" required>
+            <select id="compoundingFrequency" required>
+                <option value="" disabled selected>Compounding Frequency</option>
+                <option value="daily">Daily</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="annually">Annually</option>
+            </select>
+            <input type="number" id="timeHorizon" placeholder="Time Horizon (Years)" required>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
