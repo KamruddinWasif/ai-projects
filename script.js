@@ -8,6 +8,12 @@ document.getElementById("calculator-form").addEventListener("submit", function(e
   const compoundingFrequency = document.getElementById("compoundingFrequency").value;
   const timeHorizon = parseFloat(document.getElementById("timeHorizon").value);
 
+  // Validate compounding frequency
+  if (getCompoundingPeriods(compoundingFrequency) === 0) {
+    alert("Please select a valid compounding frequency.");
+    return;
+  }
+
   const futureValue = calculateFutureValue(initialDeposit, periodicDeposit, depositFrequency, interestRate, compoundingFrequency, timeHorizon);
   showResult(futureValue);
 });
@@ -15,10 +21,16 @@ document.getElementById("calculator-form").addEventListener("submit", function(e
 function calculateFutureValue(initialDeposit, periodicDeposit, depositFrequency, interestRate, compoundingFrequency, timeHorizon) {
   const periodicInterestRate = interestRate / getCompoundingPeriods(compoundingFrequency);
   const numPeriods = timeHorizon * getCompoundingPeriods(compoundingFrequency);
-  const numDeposits = timeHorizon * getDepositFrequency(depositFrequency);
+  const depositToCompoundingRatio = getDepositFrequency(depositFrequency) / getCompoundingPeriods(compoundingFrequency);
 
   const futureValueOfPrincipal = initialDeposit * Math.pow(1 + periodicInterestRate, numPeriods);
-  const futureValueOfDeposits = periodicDeposit * ((Math.pow(1 + periodicInterestRate, numDeposits) - 1) / periodicInterestRate);
+
+  let futureValueOfDeposits;
+  if (interestRate === 0) {
+    futureValueOfDeposits = periodicDeposit * depositToCompoundingRatio * numPeriods;
+  } else {
+    futureValueOfDeposits = periodicDeposit * depositToCompoundingRatio * (Math.pow(1 + periodicInterestRate, numPeriods) - 1) / periodicInterestRate;
+  }
 
   return futureValueOfPrincipal + futureValueOfDeposits;
 }
