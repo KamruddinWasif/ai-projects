@@ -8,15 +8,23 @@ document.getElementById("calculator-form").addEventListener("submit", function(e
   const compoundingFrequency = document.getElementById("compoundingFrequency").value;
   const timeHorizon = parseFloat(document.getElementById("timeHorizon").value);
 
-  // Validate compounding frequency
-  if (getCompoundingPeriods(compoundingFrequency) === 0) {
-    alert("Please select a valid compounding frequency.");
+  if (!validateInputs([initialDeposit, periodicDeposit, interestRate, timeHorizon])) {
+    alert("Please enter valid positive values for all inputs.");
     return;
   }
 
   const futureValue = calculateFutureValue(initialDeposit, periodicDeposit, depositFrequency, interestRate, compoundingFrequency, timeHorizon);
   showResult(futureValue);
 });
+
+function validateInputs(inputs) {
+  for (let input of inputs) {
+    if (input < 0) {
+      return false;
+    }
+  }
+  return true;
+}
 
 function calculateFutureValue(initialDeposit, periodicDeposit, depositFrequency, interestRate, compoundingFrequency, timeHorizon) {
   const periodicInterestRate = interestRate / getCompoundingPeriods(compoundingFrequency);
