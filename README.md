@@ -1,2 +1,5 @@
-# ai-projects
-An organized group of completed and in-progress projects I'm making using ai or with ai api.
+Cuppa Savings Calculator
+
+Checking to see how much you could've made if you hadnt bought that starbucks :)
+
+check it out on https://kamruddinwasif.github.io/cuppaAppWeb/ 
